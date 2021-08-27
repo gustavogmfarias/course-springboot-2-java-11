@@ -1,6 +1,6 @@
 package com.educandoweb.course.entities;
 
-import java.io.Serializable;
+import java.io.Serializable; 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -12,9 +12,10 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-@Entity
-@Table(name = "tb_user")
-public class User implements Serializable {
+
+@Entity  //avisa ao hibernate que é uma entidade
+@Table(name = "tb_user") //é preciso mudar o nome porque pode ter alguma palavra que já é usada por padrão pelo codigo
+public class User implements Serializable { //toda entidade tem que ser serializada
 
 	private static final long serialVersionUID = 1L;
 	@Id
@@ -25,8 +26,9 @@ public class User implements Serializable {
 	private String password;
 	private String phone;
 	
-	@OneToMany(mappedBy = "client")
-	private List<Order> orders = new ArrayList<>();
+	
+	@OneToMany(mappedBy = "client") //informa ao hibernate qual é o atributo que está sendo mapeado
+	private List<Order> orders = new ArrayList<>(); //é uma array porque um usuário pode ter muitos pedidos
 
 	public User(Long id, String name, String email, String password, String phone) {
 		super();

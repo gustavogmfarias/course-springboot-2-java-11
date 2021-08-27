@@ -12,9 +12,12 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "tb_order")
-public class Order implements Serializable {
+public class Order implements Serializable { // é obrigado fazer esse implemente nas config
 
 	/**
 	* 
@@ -23,10 +26,19 @@ public class Order implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	private Instant moment;
-	
-	@ManyToOne
-	@JoinColumn(name = "client_id")
+
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss'Z'", timezone = "GMT") // usar para
+																										// colocar o
+																										// padrão data e
+																										// hora que será
+																										// usado
+	private Instant moment; // tipo de tempo
+
+	@JsonIgnore // protege para que não entre em loop infinito order chamando user e user
+				// chamando order. Não precisa ficar do lado do "um", apenas ao lado do "muitos"
+	@ManyToOne // siginifca que é muitos para um
+	@JoinColumn(name = "client_id") // informa qual é a coluna do user que vamos faz a conexão e damos o nome para a
+									// coluna
 	private User client;
 
 	public Order() {
@@ -36,7 +48,7 @@ public class Order implements Serializable {
 		super();
 		this.id = id;
 		this.moment = moment;
-		this.client = client;
+		this.client = client; // referencia ao cliente
 	}
 
 	public Long getId() {

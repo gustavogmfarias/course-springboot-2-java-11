@@ -3,7 +3,7 @@ package com.educandoweb.course;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-@SpringBootApplication
+@SpringBootApplication //informa que é uma aplicação do spring boot;
 public class CourseApplication {
 
 	public static void main(String[] args) {

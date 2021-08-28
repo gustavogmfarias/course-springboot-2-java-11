@@ -12,6 +12,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.educandoweb.course.entities.enums.OrderStatus;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -28,11 +29,15 @@ public class Order implements Serializable { // é obrigado fazer esse implement
 	private Long id;
 
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss'Z'", timezone = "GMT") // usar para
-																										// colocar o
-																										// padrão data e
-																										// hora que será
-																										// usado
+																											// colocar o
+																											// padrão
+																											// data e
+																											// hora que
+																											// será
+																											// usado
 	private Instant moment; // tipo de tempo
+
+	private Integer orderStatus; // coloco integer para explicitar que é um numero
 
 	@JsonIgnore // protege para que não entre em loop infinito order chamando user e user
 				// chamando order. Não precisa ficar do lado do "um", apenas ao lado do "muitos"
@@ -44,10 +49,11 @@ public class Order implements Serializable { // é obrigado fazer esse implement
 	public Order() {
 	}
 
-	public Order(Long id, Instant moment, User client) {
+	public Order(Long id, Instant moment, OrderStatus orderStatus, User client) {
 		super();
 		this.id = id;
 		this.moment = moment;
+		setOrderStatus(orderStatus);
 		this.client = client; // referencia ao cliente
 	}
 
@@ -69,6 +75,19 @@ public class Order implements Serializable { // é obrigado fazer esse implement
 
 	public User getClient() {
 		return client;
+	}
+
+	public OrderStatus getOrderStatus() {
+		return OrderStatus.valueOf(orderStatus); // como agora o orderStatus é um inteiro lá em cima, a gente deve
+													// converte-lo
+		// para orderStatus com o value of, para retornar o orderstatus certinho
+	}
+
+	public void setOrderStatus(OrderStatus orderStatus) { // no set ele vai receber o orderstatus e vai retornar como
+															// interiro.
+		
+		if(orderStatus != null) { //para evitar que coloque vlaor nulo;
+		this.orderStatus = orderStatus.getCode(); } //usa-se o get code para pegar o codigo
 	}
 
 	public void setClient(User client) {

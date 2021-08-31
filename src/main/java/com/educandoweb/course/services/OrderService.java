@@ -11,6 +11,11 @@ import com.educandoweb.course.repositories.OrderRepository;
 
 @Service
 public class OrderService {
+	/*
+	 * Isso mesmo! Normalmente se utiliza uma camada de serviço no meio, entre o
+	 * controller e o repository, na qual ficam as regras de negócio e chamada ao
+	 * repository para persistir/recuperar os dados do banco.
+	 */
 
 	@Autowired
 	private OrderRepository repository;

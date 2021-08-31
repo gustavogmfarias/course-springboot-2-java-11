@@ -2,10 +2,11 @@ package com.educandoweb.course.repositories;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import com.educandoweb.course.entities.User;
+import com.educandoweb.course.entities.Category;
 
-public interface UserRepository extends JpaRepository<User, Long>{ // faz orderrepositoy se tornar una jpa, do tipo
-	// user, retonando long
+public interface CategoryRepository extends JpaRepository<Category, Long> { // faz orderrepositoy se tornar una jpa, do
+																			// tipo
+	// category, retonando long
 	/*
 	 * Um repositório está vinculado à regra de negócio da aplicação e está
 	 * associado ao agregado dos seus objetos de negócio e retorna objetos de

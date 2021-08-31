@@ -20,9 +20,9 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 @Table(name = "tb_order")
 public class Order implements Serializable { // é obrigado fazer esse implemente nas config
 
-	/**
-	* 
-	*/
+	/*Entidade ou Tabela: É onde todas as informações inseridas em um banco de dados relacional são armazenadas. É uma estrutura formada por linhas e colunas onde cada linha consiste de, pelo menos, uma ou várias colunas.
+	Classe de Entidade: É uma classe do tipo Bean que faz referência a uma entidade do banco de dados, e cada instância desta entidade representa uma linha (registro ou tupla) na tabela (entidade).*/
+
 	private static final long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

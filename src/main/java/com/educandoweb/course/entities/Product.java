@@ -9,12 +9,14 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
-import javax.persistence.Transient;
 
 @Entity
-@Table(name = "tb_products")
-public class Product implements Serializable { //toda entidade tem que ser serializada
+@Table(name = "tb_products") // cria o nome da tabela
+public class Product implements Serializable { // toda entidade tem que ser serializada
 
 	private static final long serialVersionUID = 1L;
 
@@ -26,7 +28,26 @@ public class Product implements Serializable { //toda entidade tem que ser seria
 	private double price;
 	private String imgUrl;
 
-	@Transient //impede que o java tente interpretar
+	// @Transient //impede que o java tente interpretar, coloquei temporariamente
+	// para poder compilar
+
+	@ManyToMany // informa que o atributo é de muitos para muitos, ou seja, um produto pode ter
+				// // muitas categorias, e uma categoria pode ter muitos produtos
+	@JoinTable(name = "tb_product_categoy", joinColumns = @JoinColumn(name = "product_id"), 
+	inverseJoinColumns = @JoinColumn(name = "category_id"))
+	
+	
+	
+	// cria uma tabela
+																							// relacional no bd //o join
+																							// collum é pra colocar qual
+																							// o a chave estrangeira da
+																							// coluna referente ao
+																							// produto
+	// ja a inverse join column, cria a coluna da outr achave estrangeira do bd
+	// relacional, no caso, o inverso de product é category;
+	//na clase category, vou informar o mapeamento que fizemos aqui
+
 	private Set<Category> categories = new HashSet<>(); // set em vez de list porque o produto não pode ter a mesma
 														// categoria mais de uma vez; // o set é uma interface e não
 														// pode ser instanciado, por isso se usa o hashset
@@ -106,6 +127,4 @@ public class Product implements Serializable { //toda entidade tem que ser seria
 		return Objects.equals(id, other.id);
 	}
 
-	
-	
 }

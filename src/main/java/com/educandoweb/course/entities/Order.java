@@ -42,7 +42,7 @@ public class Order implements Serializable { // é obrigado fazer esse implement
 	@JsonIgnore // protege para que não entre em loop infinito order chamando user e user
 				// chamando order. Não precisa ficar do lado do "um", apenas ao lado do "muitos"
 	@ManyToOne // siginifca que é muitos para um
-	@JoinColumn(name = "client_id") // informa qual é a coluna do user que vamos faz a conexão e damos o nome para a
+	@JoinColumn(name = "client_id") // informa qual é a coluna do user que vamos fazer a conexão e damos o nome para a
 									// coluna
 	private User client;
 
